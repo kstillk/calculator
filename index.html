@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Simple DOM example</title>
+    </head>
+
+    <body>
+        <div id="result">
+            <p id="display"></p>
+        </div>
+        <div id="input">
+            <div id="left">
+                <div id="top">
+                    <button id="clear">AC</button>
+                    <!-- <button id="plusminus">+/-</button>
+                    <button id="percent">%</button> -->
+                </div>
+                <div id="bottom">       
+                    <button id="one">1</button>
+                    <button id="two">2</button>
+                    <button id="three">3</button>
+                    <button id="four">4</button>
+                    <button id="five">5</button>
+                    <button id="six">6</button>
+                    <button id="seven">7</button>
+                    <button id="eight">8</button>
+                    <button id="nine">9</button>
+                    <button id="zero">0</button>
+                    <button id="float">.</button>
+                </div>
+            </div>
+            <div id="right">
+                <button id="divide">/</button>
+                <button id="multiply">x</button>  
+                <button id="subtract">-</button>
+                <button id="add">+</button>
+                <button id="operate">=</button> 
+            </div> 
+        </div>
+
+        <script>
+
+const add = (a, b) => Number(a) + Number(b);
+const subtract = (a, b) => a - b;
+const multiply = (a, b) => a * b;
+const divide = (a, b) => a / b;
+
+let left = null;
+let right = null;
+let operator = null;
+let result = '';
+
+let clear = document.querySelector('#clear');
+let display = document.querySelector('#display');
+
+function operate(operator, left, right) {
+    let cut = left.toString().split('').length + 1;
+    right = result.toString().split('').slice(cut).join('');
+
+    if (!right) return result;
+    else if (right == 0 && operator == '/') {
+        input.removeEventListener('click', myFunction);
+        return 'Not possible to calculate. Press AC';
+    } else if (operator && left && typeof Number(right) == 'number') {
+        if (operator === '+') return add(left, right);
+        else if (operator === '-') return subtract(left, right);
+        else if (operator === '*') return  multiply(left, right);
+        else if (operator === '/') return divide(left, right); 
+    } else {
+        input.removeEventListener('click', myFunction);
+        return 'Error. Press AC'
+    }
+}
+
+clear.addEventListener('click', function(event) {
+    input.addEventListener('click', myFunction);
+    result = ''
+    display.textContent = result;
+    operator = null;
+})
+
+const myFunction = function() {
+    let target = event.target;
+    switch(target.id) {
+        case 'one' : result += '1';
+            break;
+        case 'two' : result += '2';
+            break;
+        case 'three' : result += '3';
+            break;
+        case 'four' : result += '4';
+            break;
+        case 'five' : result += '5';
+            break;
+        case 'six' : result += '6';
+            break;
+        case 'seven' : result += '7';
+            break;
+        case 'eight' : result += '8';
+            break;
+        case 'nine' : result += '9';
+            break;
+        case 'zero' : result += '0';
+            break;
+        case 'float' : result += '.';
+            break;
+        case 'divide' : 
+            if (operator !== null) result = operate(operator, left, right);
+            operator = '/';
+            left = result;
+            result += '/';
+            break;
+        case 'multiply' : 
+            if (operator !== null) result = operate(operator, left, right);
+            operator = '*';
+            left = result;
+            result += '*';
+            break;
+        case 'subtract' : 
+            if (operator !== null) result = operate(operator, left, right); 
+            operator = '-';
+            left = result;
+            result += '-';
+            break;
+        case 'add' : 
+            if (operator !== null) result = operate(operator, left, right);
+            operator = '+';
+            left = result;
+            result += '+';
+            break;
+        case 'operate' :  
+            result = operate(operator, left, right);
+            operator = null;
+            break;
+    }
+    display.textContent = result;
+}
+
+let input = document.querySelector('#input');
+input.addEventListener('click', myFunction);
+
+        </script>
+    </body>
+</html>
