@@ -14,8 +14,8 @@
             <div id="left">
                 <div id="top">
                     <button id="clear">AC</button>
-                    <!-- <button id="plusminus">+/-</button>
-                    <button id="percent">%</button> -->
+                    <button id="plusminus">+/-</button>
+                    <button id="percent">%</button>
                 </div>
                 <div id="bottom">       
                     <button id="one">1</button>
@@ -42,10 +42,10 @@
 
         <script>
 
-const add = (a, b) => Number(a) + Number(b);
-const subtract = (a, b) => a - b;
-const multiply = (a, b) => a * b;
-const divide = (a, b) => a / b;
+const add = (a, b) => Math.round((Number(a) + Number(b)) * 100) / 100;
+const subtract = (a, b) => Math.round((a - b) * 100) /100;
+const multiply = (a, b) => Math.round((a * b) * 100) /100;
+const divide = (a, b) => Math.round((a / b) * 100) /100;
 
 let left = null;
 let right = null;
@@ -56,10 +56,9 @@ let clear = document.querySelector('#clear');
 let display = document.querySelector('#display');
 
 function operate(operator, left, right) {
-    let cut = left.toString().split('').length + 1;
-    right = result.toString().split('').slice(cut).join('');
+    right = result;
 
-    if (!right) return result;
+    if (!right || !left) return display.textContent;
     else if (right == 0 && operator == '/') {
         input.removeEventListener('click', myFunction);
         return 'Not possible to calculate. Press AC';
@@ -78,6 +77,8 @@ clear.addEventListener('click', function(event) {
     input.addEventListener('click', myFunction);
     result = ''
     display.textContent = result;
+    left = null;
+    right = null;
     operator = null;
 })
 
@@ -110,32 +111,51 @@ const myFunction = function() {
             if (operator !== null) result = operate(operator, left, right);
             operator = '/';
             left = result;
-            result += '/';
+            result = '';
             break;
         case 'multiply' : 
             if (operator !== null) result = operate(operator, left, right);
             operator = '*';
             left = result;
-            result += '*';
+            result = '';
             break;
         case 'subtract' : 
-            if (operator !== null) result = operate(operator, left, right); 
+            if (result == '') {
+                result += '-';
+                break;
+            }
+            else if (operator !== null) result = operate(operator, left, right); 
             operator = '-';
             left = result;
-            result += '-';
+            result = '';
             break;
         case 'add' : 
             if (operator !== null) result = operate(operator, left, right);
             operator = '+';
             left = result;
-            result += '+';
+            result = '';
+            break;
+        case 'plusminus' : 
+            result = display.textContent;
+            if(Array.from(result)[0] == '-') {
+                result = result.slice(1);
+                if (left == '-' + result) left = result;
+            } else {
+                result = '-' + result;
+                if (left == result.slice(1)) left = result;
+            }
+            break;
+        case 'percent' : 
+            result = Math.round((result / 100) * 100) / 100;
+            if (left == result * 100) left = result;
             break;
         case 'operate' :  
             result = operate(operator, left, right);
             operator = null;
             break;
     }
-    display.textContent = result;
+    if (result == '') display.textContent = left;
+    else display.textContent = result;
 }
 
 let input = document.querySelector('#input');
