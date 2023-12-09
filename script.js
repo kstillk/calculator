@@ -1,7 +1,7 @@
-const add = (a, b) => Math.round((Number(a) + Number(b)) * 100000) / 100000;
-const subtract = (a, b) => Math.round((a - b) * 100000) /100000;
-const multiply = (a, b) => Math.round((a * b) * 100000) /100000;
-const divide = (a, b) => Math.round((a / b) * 100000) /100000;
+const add = (a, b) => Math.round((Number(a) + Number(b)) * 100) / 100;
+const subtract = (a, b) => Math.round((a - b) * 100) /100;
+const multiply = (a, b) => Math.round((a * b) * 100) /100;
+const divide = (a, b) => Math.round((a / b) * 100) /100;
 
 let left = null;
 let right = null;
@@ -109,7 +109,7 @@ const myFunction = function() {
             }
             break;
         case 'percent' : 
-            result = Math.round((result / 100) * 100000) / 100000;
+            result = Math.round((result / 100) * 100) / 100;
             if (left == result * 100) left = result;
             break;
         case 'operate' :  

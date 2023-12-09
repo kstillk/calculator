@@ -4,40 +4,43 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title>Simple DOM example</title>
-     <script src="script.js" defer></script>
+     <script src="./script.js" defer></script>
+     <link rel="stylesheet" href="./style.css">
     </head>
     <body>
-        <div id="result">
-            <p id="display"></p>
-        </div>
-        <div id="input">
-            <div id="left">
-                <div id="top">
-                    <button id="clear">AC</button>
-                    <button id="plusminus">+/-</button>
-                    <button id="percent">%</button>
-                </div>
-                <div id="bottom">       
-                    <button id="one">1</button>
-                    <button id="two">2</button>
-                    <button id="three">3</button>
-                    <button id="four">4</button>
-                    <button id="five">5</button>
-                    <button id="six">6</button>
-                    <button id="seven">7</button>
-                    <button id="eight">8</button>
-                    <button id="nine">9</button>
-                    <button id="zero">0</button>
-                    <button id="float">.</button>
-                </div>
+        <div id="container">
+            <div id="result">
+                <p id="display"></p>
             </div>
-            <div id="right">
-                <button id="divide">/</button>
-                <button id="multiply">x</button>  
-                <button id="subtract">-</button>
-                <button id="add">+</button>
-                <button id="operate">=</button> 
-            </div> 
+            <div id="input">
+                <div id="left">
+                    <div id="top">
+                        <button id="clear">C</button>
+                        <button id="plusminus">+/-</button>
+                        <button id="percent">%</button>
+                    </div>
+                    <div id="bottom">   
+                        <button id="seven">7</button>
+                        <button id="eight">8</button>
+                        <button id="nine">9</button> 
+                        <button id="four">4</button>
+                        <button id="five">5</button>
+                        <button id="six">6</button>   
+                        <button id="one">1</button>
+                        <button id="two">2</button>
+                        <button id="three">3</button>
+                        <button id="zero">0</button>
+                        <button id="float">.</button>
+                    </div>
+                </div>
+                <div id="right">
+                    <button id="divide">/</button>
+                    <button id="multiply">x</button>  
+                    <button id="subtract">-</button>
+                    <button id="add">+</button>
+                    <button id="operate">=</button> 
+                </div> 
+            </div>
         </div>
     </body>
 </html>
