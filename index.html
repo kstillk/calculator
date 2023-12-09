@@ -42,10 +42,10 @@
 
         <script>
 
-const add = (a, b) => Math.round((Number(a) + Number(b)) * 100) / 100;
-const subtract = (a, b) => Math.round((a - b) * 100) /100;
-const multiply = (a, b) => Math.round((a * b) * 100) /100;
-const divide = (a, b) => Math.round((a / b) * 100) /100;
+const add = (a, b) => Math.round((Number(a) + Number(b)) * 100000) / 100000;
+const subtract = (a, b) => Math.round((a - b) * 100000) /100000;
+const multiply = (a, b) => Math.round((a * b) * 100000) /100000;
+const divide = (a, b) => Math.round((a / b) * 100000) /100000;
 
 let left = null;
 let right = null;
@@ -54,6 +54,7 @@ let result = '';
 
 let clear = document.querySelector('#clear');
 let display = document.querySelector('#display');
+let float = document.querySelector('#float');
 
 function operate(operator, left, right) {
     right = result;
@@ -74,13 +75,19 @@ function operate(operator, left, right) {
 }
 
 clear.addEventListener('click', function(event) {
-    input.addEventListener('click', myFunction);
     result = ''
     display.textContent = result;
     left = null;
     right = null;
     operator = null;
-})
+});
+
+floatFunction = function() {
+    result += '.';
+    float.removeEventListener('click', floatFunction);
+} 
+
+float.addEventListener('click', floatFunction)
 
 const myFunction = function() {
     let target = event.target;
@@ -104,8 +111,6 @@ const myFunction = function() {
         case 'nine' : result += '9';
             break;
         case 'zero' : result += '0';
-            break;
-        case 'float' : result += '.';
             break;
         case 'divide' : 
             if (operator !== null) result = operate(operator, left, right);
@@ -146,7 +151,7 @@ const myFunction = function() {
             }
             break;
         case 'percent' : 
-            result = Math.round((result / 100) * 100) / 100;
+            result = Math.round((result / 100) * 100000) / 100000;
             if (left == result * 100) left = result;
             break;
         case 'operate' :  
@@ -156,6 +161,8 @@ const myFunction = function() {
     }
     if (result == '') display.textContent = left;
     else display.textContent = result;
+
+    if (!display.textContent.includes('.')) float.addEventListener('click', floatFunction);
 }
 
 let input = document.querySelector('#input');
