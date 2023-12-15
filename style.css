@@ -32,19 +32,16 @@ body {
     align-items: center;
     justify-content: end;
     padding-right: 10px;
-    
+    letter-spacing: -5px;
 }
 
 #display {
     color: white;
-    max-width: 100%;
-    overflow: hidden;
 }
 
 #input {
     display: flex;
-    flex-direction: row;
-    
+    flex-direction: row; 
 }
 
 #top {
@@ -95,4 +92,27 @@ button {
     display: flex;
     flex-direction: column;
     width: 125px;
+}
+
+#bottom button:active {
+    background-color: #d4d4d2a2;
+}
+
+#top button:active {
+    background-color: #d4d4d2a2;
+}
+
+#right button:focus {
+    background-color: white;
+    color: #FF9500;
+}
+
+#right button:last-of-type:focus {
+    background-color: #FF9500;
+    color: white
+}
+
+#right button:last-of-type:active {
+    background-color: white;
+    color: #FF9500;
 }
